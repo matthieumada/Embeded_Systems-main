@@ -1,0 +1,30 @@
+#include "xparameters.h"
+#include "xil_io.h"
+#include "xil_printf.h"
+
+#define BRAM_BASEADDR XPAR_AXI_BRAM_CTRL_0_S_AXI_BASEADDR
+
+int main_ui() {
+    xil_printf("=== Test BRAM ===\n\r");
+
+    const char *msg = "You have unlocked the item: BRAM! ";
+    int i = 0;
+
+    xil_printf("Base address: 0x%08X\n\r", BRAM_BASEADDR);
+
+    // Write in BRAM
+    while (msg[i] != '\0') {
+        Xil_Out8(BRAM_BASEADDR + i, msg[i]);
+        i++;
+    }
+
+    // Reads from BRAM
+    xil_printf("Lecture BRAM: ");
+    for (int j = 0; j < i; j++) {
+        char c = Xil_In8(BRAM_BASEADDR + j);
+        xil_printf("%c", c);
+    }
+    xil_printf("\n\r");
+
+    return 0;
+}
