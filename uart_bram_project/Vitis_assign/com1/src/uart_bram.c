@@ -9,7 +9,7 @@
 
 XUartLite UartLite;
 
-int main() {
+int main_uhvyv() {
     int Status;
     u8 SendBuffer[100];
     u8 RecvBuffer[100];

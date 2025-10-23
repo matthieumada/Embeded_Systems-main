@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (lin64) Build 3064766 Wed Nov 18 09:12:47 MST 2020
-| Date         : Fri Oct  3 22:35:11 2025
+| Date         : Fri Oct  3 23:17:36 2025
 | Host         : delinm-GF63-Thin-10SCSR running 64-bit Ubuntu 20.04.6 LTS
 | Command      : report_utilization -file demo_1_utilization_synth.rpt -pb demo_1_utilization_synth.pb
 | Design       : demo_1
