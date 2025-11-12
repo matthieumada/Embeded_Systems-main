@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include "xparameters.h"
+#include "xuartlite.h"
+#include "xil_printf.h"
+
+// Définition de l'adresse de base de l'UART Lite (à adapter selon votre design)
+#define UARTLITE_DEVICE_ID XPAR_AXI_UARTLITE_0_DEVICE_ID
+#define UARTLITE_BASEADDR XPAR_AXI_UARTLITE_0_BASEADDR
+
+// Instance de l'UART Lite
+XUartLite UartLite;
+
+int main_rt() {
+    int Status;
+    u8 SendBuffer[100];
+    u8 RecvBuffer[100];
+    int Index;
+    int SentCount = 0;
+    int RecvCount = 0;
+
+    // UART Lite INitialiszation
+    Status = XUartLite_Initialize(&UartLite, UARTLITE_DEVICE_ID);
+    if (Status != XST_SUCCESS) {
+        xil_printf("Initialisation error \r\n");
+        return XST_FAILURE;
+    }
+
+    xil_printf("Test communication UART LIte\r\n");
+    xil_printf("Press something to start \r\n");
+
+    // Wait something
+    while (!XUartLite_Recv(&UartLite, RecvBuffer, 1));
+
+    // Sending message
+    const char *Message = "Hello i am PINQ Z2 from AXI UART Lite!\r\n";
+    for (Index = 0; Message[Index] != '\0'; Index++) {
+        SendBuffer[Index] = Message[Index];
+    }
+    SendBuffer[Index] = '\0';
+
+    // Send the message
+    while (SentCount < Index) {
+        SentCount += XUartLite_Send(&UartLite, &SendBuffer[SentCount], Index - SentCount);
+    }
+
+    xil_printf("Messagesent: %s\r\n", SendBuffer);
+
+    // Answer got (écho)
+    xil_printf("waiting for reception..\r\n");
+    while (1) {
+        RecvCount = XUartLite_Recv(&UartLite, RecvBuffer, sizeof(RecvBuffer));
+        if (RecvCount > 0) {
+            RecvBuffer[RecvCount] = '\0';
+            xil_printf("Message got : %s\r\n", RecvBuffer);
+            break;
+        }
+    }
+
+    xil_printf("Test completed !\r\n");
+    return XST_SUCCESS;
+}

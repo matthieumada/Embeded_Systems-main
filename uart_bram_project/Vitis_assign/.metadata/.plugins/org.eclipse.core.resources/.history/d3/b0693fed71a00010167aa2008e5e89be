@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include "xparameters.h"
+#include "xuartlite.h"
+#include "xil_printf.h"
+
+// Définition de l'adresse de base de l'UART Lite (à adapter selon votre design)
+#define UARTLITE_DEVICE_ID XPAR_AXI_UARTLITE_0_DEVICE_ID
+#define UARTLITE_BASEADDR XPAR_AXI_UARTLITE_0_BASEADDR
+
+// Instance de l'UART Lite
+XUartLite UartLite;
+
+int main_uart() {
+    int Status;
+    u8 SendBuffer[100];
+    u8 RecvBuffer[100];
+    int Index;
+    int SentCount = 0;
+    int RecvCount = 0;
+
+    // Initialisation de l'UART Lite
+    Status = XUartLite_Initialize(&UartLite, UARTLITE_DEVICE_ID);
+    if (Status != XST_SUCCESS) {
+        xil_printf("Erreur d'initialisation de l'UART Lite\r\n");
+        return XST_FAILURE;
+    }
+
+    xil_printf("Test de communication UART avec AXI UART Lite\r\n");
+    xil_printf("Appuyez sur une touche pour commencer...\r\n");
+
+    // Attendre une touche
+    while (!XUartLite_Recv(&UartLite, RecvBuffer, 1));
+
+    // Envoi d'un message
+    const char *Message = "Bonjour depuis la PYNQ-Z2 via AXI UART Lite!\r\n";
+    for (Index = 0; Message[Index] != '\0'; Index++) {
+        SendBuffer[Index] = Message[Index];
+    }
+    SendBuffer[Index] = '\0';
+
+    // Envoyer le message
+    while (SentCount < Index) {
+        SentCount += XUartLite_Send(&UartLite, &SendBuffer[SentCount], Index - SentCount);
+    }
+
+    xil_printf("Message envoyé : %s\r\n", SendBuffer);
+
+    // Réception d'une réponse (écho)
+    xil_printf("En attente de réception...\r\n");
+    while (1) {
+        RecvCount = XUartLite_Recv(&UartLite, RecvBuffer, sizeof(RecvBuffer));
+        if (RecvCount > 0) {
+            RecvBuffer[RecvCount] = '\0';
+            xil_printf("Message reçu : %s\r\n", RecvBuffer);
+            break;
+        }
+    }
+
+    xil_printf("Test terminé avec succès !\r\n");
+    return XST_SUCCESS;
+}

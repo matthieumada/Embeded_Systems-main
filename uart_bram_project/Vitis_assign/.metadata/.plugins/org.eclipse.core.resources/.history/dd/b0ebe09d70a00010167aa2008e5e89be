@@ -1,0 +1,44 @@
+#include "xparameters.h"
+#include "xil_io.h"
+#include "xuartlite.h"
+#include "xil_printf.h"
+
+#define BRAM_BASEADDR   XPAR_AXI_BRAM_CTRL_0_S_AXI_BASEADDR
+#define UARTLITE_DEVICE XPAR_UARTLITE_0_DEVICE_ID
+#define BRAM_SIZE       1024  // taille max en octets
+
+int main() {
+    XUartLite UartLite;
+    int status = XUartLite_Initialize(&UartLite, UARTLITE_DEVICE);
+    if (status != XST_SUCCESS) {
+        xil_printf("Erreur init UART Lite\n\r");
+        return -1;
+    }
+
+    xil_printf("=== Attente de message sur PMOD A ===\n\r");
+
+    int index = 0;
+    while (1) {
+        // Vérifier si un caractère est disponible
+        if (XUartLite_IsReceiveEmpty(UARTLITE_DEVICE) == 0) {
+            u8 c = XUartLite_RecvByte(UARTLITE_DEVICE);
+
+            // Écrire dans la BRAM si on n'a pas dépassé la taille
+            if (index < BRAM_SIZE) {
+                Xil_Out8(BRAM_BASEADDR + index, c);
+                index++;
+            }
+
+            // Afficher dans la console Vitis
+            xil_printf("%c", c);
+
+            // Optionnel : fin de message sur '\n'
+            if (c == '\n') {
+                xil_printf("\n--- Message reçu ---\n\r");
+                index = 0; // reset pour le prochain message
+            }
+        }
+    }
+
+    return 0;
+}

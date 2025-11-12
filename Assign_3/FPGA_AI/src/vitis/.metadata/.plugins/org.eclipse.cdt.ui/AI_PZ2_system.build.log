@@ -1,0 +1,10 @@
+20:33:28 **** Build of configuration Debug for project AI_PZ2_system ****
+make all 
+Generating bif file for the system project
+Executing command '::scw::generate_bif -xpfm /home/delinm/Documents/Embeded_Systems-main/Assign_3/FPGA_AI/src/vitis/design_1_wrapper/export/design_1_wrapper/design_1_wrapper.xpfm -domains standalone_ps7_cortexa9_0 -bifpath /home/delinm/Documents/Embeded_Systems-main/Assign_3/FPGA_AI/src/vitis/AI_PZ2_system/Debug/system.bif' on XSCT
+sdcard_gen --xpfm /home/delinm/Documents/Embeded_Systems-main/Assign_3/FPGA_AI/src/vitis/design_1_wrapper/export/design_1_wrapper/design_1_wrapper.xpfm --sys_config design_1_wrapper --bif /home/delinm/Documents/Embeded_Systems-main/Assign_3/FPGA_AI/src/vitis/AI_PZ2_system/Debug/system.bif --bitstream /home/delinm/Documents/Embeded_Systems-main/Assign_3/FPGA_AI/src/vitis/AI_PZ2/_ide/bitstream/design_1_wrapper.bit --elf /home/delinm/Documents/Embeded_Systems-main/Assign_3/FPGA_AI/src/vitis/AI_PZ2/Debug/AI_PZ2.elf,ps7_cortexa9_0
+creating BOOT.BIN using /home/delinm/Documents/Embeded_Systems-main/Assign_3/FPGA_AI/src/vitis/AI_PZ2/_ide/bitstream/design_1_wrapper.bit
+Running /tools/Xilinx/Vitis/2020.2/bin/bootgen  -image /home/delinm/Documents/Embeded_Systems-main/Assign_3/FPGA_AI/src/vitis/AI_PZ2_system/Debug/sd_card_temp/boot.bif -w -o i BOOT.BIN
+
+20:33:34 Build Finished (took 6s.324ms)
+

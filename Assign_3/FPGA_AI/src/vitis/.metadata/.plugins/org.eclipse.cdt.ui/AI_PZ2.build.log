@@ -1,0 +1,10 @@
+20:33:27 **** Incremental Build of configuration Debug for project AI_PZ2 ****
+make all 
+make --no-print-directory pre-build
+a9-linaro-pre-build-step
+ 
+make --no-print-directory main-build
+make[1]: Nothing to be done for 'main-build'.
+
+20:33:28 Build Finished (took 164ms)
+

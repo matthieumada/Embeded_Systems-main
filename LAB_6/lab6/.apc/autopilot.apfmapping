@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
+  <source>
+    <originFiles name="trial_1.cpp" path="/home/delinm/Documents/Embeded_Systems-main/LAB_6/trial_1.cpp"/>
+  </source>
+  <testbench>
+    <originFiles name="example_hls_tb.cpp" path="/home/delinm/Documents/Embeded_Systems-main/LAB_6/example_hls_tb.cpp"/>
+    <originFiles name="trial_1.cpp" path="/home/delinm/Documents/Embeded_Systems-main/LAB_6/trial_1.cpp"/>
+  </testbench>
+</autopilotfilemapping:AutoPilotFileMapping>

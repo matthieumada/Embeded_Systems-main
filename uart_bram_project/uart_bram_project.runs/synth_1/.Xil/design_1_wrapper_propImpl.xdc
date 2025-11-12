@@ -1,0 +1,5 @@
+set_property SRC_FILE_INFO {cfile:/home/delinm/Documents/Embeded_Systems-main/Tools/PYNQ-Z2-v1.0.xdc rfile:../../../../Tools/PYNQ-Z2-v1.0.xdc id:1} [current_design]
+set_property src_info {type:XDC file:1 line:47 export:INPUT save:INPUT read:READ} [current_design]
+set_property -dict { PACKAGE_PIN U19   IOSTANDARD LVCMOS33 } [get_ports { tx_0 }]; #IO_L12N_T1_MRCC_34 Sch=ja_n[3]
+set_property src_info {type:XDC file:1 line:48 export:INPUT save:INPUT read:READ} [current_design]
+set_property -dict { PACKAGE_PIN W18   IOSTANDARD LVCMOS33 } [get_ports { rx_0 }]; #IO_L22P_T3_34 Sch=ja_p[4]
